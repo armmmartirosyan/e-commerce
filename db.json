@@ -1,0 +1,13 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "firstName": "John",
+      "lastName": "Smith",
+      "imageUrl": "string",
+      "email": "john@gmail.com",
+      "phone": "8923123123123",
+      "password": "something123"
+    }
+  ]
+}
