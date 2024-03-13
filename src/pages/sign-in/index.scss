@@ -20,17 +20,12 @@
     font-size: 28px;
   }
 
-  &_icon {
-    width: 40px;
-    height: 40px;
-  }
-
   &_form {
     width: 400px;
     display: flex;
     flex-direction: column;
     row-gap: 16px;
-    margin-bottom: 100px;
+    margin-bottom: 30px;
   }
 
   &_input {
@@ -41,6 +36,7 @@
     display: flex;
     align-items: center;
     cursor: pointer;
+    width: fit-content;
   }
 
   &_copy {
@@ -48,6 +44,11 @@
 
     &_link {
       color: #727272;
+      text-decoration: underline;
     }
+  }
+
+  &_dont_have_account {
+    margin-bottom: 150px;
   }
 }

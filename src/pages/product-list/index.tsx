@@ -1,4 +1,4 @@
-import requireAuth from "HOCs/RequireAuth";
+import requireAuth from "HOCs/require-auth";
 import { account } from "providers/account-provider";
 import React from "react";
 

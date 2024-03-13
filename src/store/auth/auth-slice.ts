@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { signIn } from "./auth-thunks";
+import { AuthSlice } from "types/shared-types";
 
-const initialState = {
+const initialState: AuthSlice = {
   signIn: {
     isLoading: false,
-    success: false,
+    data: null,
     error: "",
   },
 };
@@ -17,17 +18,17 @@ export const authSlice = createSlice({
     builder
       .addCase(signIn.pending, (state) => {
         state.signIn.isLoading = true;
-        state.signIn.success = false;
+        state.signIn.data = null;
         state.signIn.error = "";
       })
       .addCase(signIn.fulfilled, (state, action) => {
         state.signIn.isLoading = false;
-        state.signIn.success = true;
+        state.signIn.data = action.payload;
         state.signIn.error = "";
       })
       .addCase(signIn.rejected, (state, action) => {
         state.signIn.isLoading = false;
-        state.signIn.success = false;
+        state.signIn.data = null;
         state.signIn.error = action.payload as string;
       }),
 });

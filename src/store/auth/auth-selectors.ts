@@ -1,5 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { RootState } from "store/configureStore";
+import { RootState } from "store/configure-store";
 
 const signInBaseSelector = (state: RootState) => state.auth.signIn;
 
@@ -11,7 +11,7 @@ export const signInLoading = createSelector(
   signInBaseSelector,
   (state) => state.isLoading
 );
-export const signInSuccess = createSelector(
+export const signInData = createSelector(
   signInBaseSelector,
-  (state) => state.success
+  (state) => state.data
 );

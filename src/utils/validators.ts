@@ -11,7 +11,33 @@ class Validators {
 
     // return regex.test(password.trim());
 
-    return true;
+    return !!password.trim().length;
+  }
+
+  public validNotNumbAndSymExceptDash(text: string) {
+    const regex =
+      /^(?=.*[^0-9~`!@#$%^&*()_+={\[}\]|\:;"'<,>\.\/?\\])[^0-9~`!@#$%^&*()_+={\[}\]|\:;"'<,>\.\/?\\]{2,}$/;
+
+    return regex.test(text?.trim());
+  }
+
+  public validPhoneNumber(phoneNumber: string) {
+    const regex = /^\d{8}$/;
+
+    return regex.test(phoneNumber);
+  }
+
+  public allowTypeNotNumbAndSymExceptDash(text: string): boolean {
+    const regex =
+      /^(?=.*[^0-9~`!@#$%^&*()_+={\[}\]|\:;"'<,>\.\/?\\])?[^0-9~`!@#$%^&*()_+={\[}\]|\:;"'<,>\.\/?\\]*$/;
+
+    return regex.test(text?.trim());
+  }
+
+  public allowPhoneNumberType(value: string): boolean {
+    const regex = /^\d{0,8}$/;
+
+    return regex.test(value);
   }
 }
 

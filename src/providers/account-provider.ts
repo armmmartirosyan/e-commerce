@@ -1,19 +1,24 @@
-import { AUTH_TOKEN_KEY } from "constants/index";
+import { AUTH_TOKEN_KEY } from "constants/shared-constants";
 
 class AccountProvider {
   public getUser = () => {
     let email = "";
+    let role: number | null = null;
+
     const token = this.getAuthToken();
 
     if (token) {
-      email = token.split("-")[1];
+      const [_random, _email, _randomSecond, _role] = token.split("-");
+
+      email = _email;
+      role = +_role;
     }
 
-    return { email };
+    return { email, role };
   };
 
-  public finalizeSignIn(email: string, remember: boolean): void {
-    const token = this.generateUserToken(email);
+  public finalizeSignIn(email: string, remember: boolean, role: number): void {
+    const token = this.generateUserToken(email, role);
 
     this.setAuthToken(token, remember);
     window.location.href = "/product-list";
@@ -28,8 +33,16 @@ class AccountProvider {
     return localStorage.getItem(key) || sessionStorage.getItem(key) || "";
   }
 
-  private generateUserToken(email: string): string {
-    return Math.random() * 1000 + "-" + email + Math.random() * 1000 + "-";
+  private generateUserToken(email: string, role: number): string {
+    return (
+      Math.random() * 1000 +
+      "-" +
+      email +
+      "-" +
+      Math.random() * 1000 +
+      "-" +
+      role
+    );
   }
 
   private setAuthToken(

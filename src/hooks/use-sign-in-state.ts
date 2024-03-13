@@ -1,9 +1,10 @@
 import { ChangeEvent, useMemo, useState } from "react";
+import { UseSignInStateReturn } from "types/shared-types";
 import { validators } from "utils/validators";
 
 const { safePassword, validEmail } = validators;
 
-export default function useSignInState() {
+export default function useSignInState(): UseSignInStateReturn {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);

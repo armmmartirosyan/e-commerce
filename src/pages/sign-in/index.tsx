@@ -3,9 +3,10 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
 import SecurityIcon from "@mui/icons-material/Security";
-import notRequireAuth from "HOCs/NotRequireAuth";
-import useSignInState from "hooks/useSignInState";
-import useSignInRequest from "hooks/useSignInRequest";
+import notRequireAuth from "HOCs/not-require-auth";
+import useSignInState from "hooks/use-sign-in-state";
+import useSignInRequest from "hooks/use-sign-in-request";
+import { Link } from "react-router-dom";
 import "./index.scss";
 
 function SignIn(): JSX.Element {
@@ -70,6 +71,10 @@ function SignIn(): JSX.Element {
           Sign in
         </Button>
       </form>
+
+      <p className="sign_in_dont_have_account">
+        Don't have an account yet? <Link to="/sign-up">Sign up</Link>
+      </p>
 
       <p className="sign_in_copy">
         Copyright &copy;{" "}

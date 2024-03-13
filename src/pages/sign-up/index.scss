@@ -1,0 +1,60 @@
+.sign_up {
+  &_main {
+    width: 100vw;
+    height: 100vh;
+    padding: 100px;
+  }
+
+  &_wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 450px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  &_head_box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+    margin-bottom: 50px;
+  }
+
+  &_head_text {
+    font-size: 28px;
+  }
+
+  &_form {
+    width: 450px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  &_input {
+    &-short {
+      width: 45%;
+    }
+    &-long {
+      width: 100%;
+    }
+  }
+
+  &_back_link {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    color: #000;
+    top: 0;
+    left: 0;
+    transition: all 0.4s;
+    gap: 10px;
+
+    &:hover {
+      gap: 20px;
+    }
+  }
+}

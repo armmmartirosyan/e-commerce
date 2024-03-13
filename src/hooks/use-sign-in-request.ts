@@ -5,21 +5,24 @@ import { toast } from "react-toastify";
 import {
   signInError,
   signInLoading,
-  signInSuccess,
+  signInData,
 } from "store/auth/auth-selectors";
 import { signIn } from "store/auth/auth-thunks";
-import { useAppDispatch } from "store/configureStore";
-import { UseSignInRequestProps } from "types/shared-types";
+import { useAppDispatch } from "store/configure-store";
+import {
+  UseSignInRequestProps,
+  UseSignInRequestReturn,
+} from "types/shared-types";
 
 export default function useSignInRequest({
   email,
   password,
   remember,
   disableSignIn,
-}: UseSignInRequestProps) {
+}: UseSignInRequestProps): UseSignInRequestReturn {
   const dispatch = useAppDispatch();
   const isLoading = useSelector(signInLoading);
-  const success = useSelector(signInSuccess);
+  const data = useSelector(signInData);
   const error = useSelector(signInError);
 
   const onSignIn = useCallback(
@@ -34,10 +37,10 @@ export default function useSignInRequest({
   );
 
   useEffect(() => {
-    if (success) {
-      account.finalizeSignIn(email, remember);
+    if (data) {
+      account.finalizeSignIn(email, remember, data.role);
     }
-  }, [success, email, remember]);
+  }, [data, email, remember]);
 
   useEffect(() => {
     if (error) {
