@@ -11,4 +11,13 @@ export type SignUpInputProps = {
 };
 
 export type SignUpCheckboxProps = { disabled?: boolean };
+
 export type SignUpButtonProps = { disabled?: boolean };
+
+export type WithHeaderLayoutProps = { children: any };
+
+export type HeaderMenuItemProps = {
+  text: string;
+  url: string;
+  extraAction?: VoidFunction;
+};

@@ -5,13 +5,7 @@ import React from "react";
 function ProductList() {
   return (
     <div>
-      <button
-        onClick={() => {
-          account.signOut();
-        }}
-      >
-        log out
-      </button>
+      <button onClick={account.signOut}>log out</button>
     </div>
   );
 }

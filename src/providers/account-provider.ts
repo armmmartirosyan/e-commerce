@@ -1,24 +1,22 @@
 import { AUTH_TOKEN_KEY } from "constants/shared-constants";
 
 class AccountProvider {
-  public getUser = () => {
-    let email = "";
-    let role: number | null = null;
+  public getUserInfoFromToken = () => {
+    let id = "";
 
     const token = this.getAuthToken();
 
     if (token) {
-      const [_random, _email, _randomSecond, _role] = token.split("-");
+      const [_random, _id] = token.split("-");
 
-      email = _email;
-      role = +_role;
+      id = _id;
     }
 
-    return { email, role };
+    return { id };
   };
 
-  public finalizeSignIn(email: string, remember: boolean, role: number): void {
-    const token = this.generateUserToken(email, role);
+  public finalizeSignIn(id: string, remember: boolean): void {
+    const token = this.generateUserToken(id);
 
     this.setAuthToken(token, remember);
     window.location.href = "/product-list";
@@ -33,16 +31,8 @@ class AccountProvider {
     return localStorage.getItem(key) || sessionStorage.getItem(key) || "";
   }
 
-  private generateUserToken(email: string, role: number): string {
-    return (
-      Math.random() * 1000 +
-      "-" +
-      email +
-      "-" +
-      Math.random() * 1000 +
-      "-" +
-      role
-    );
+  private generateUserToken(id: string): string {
+    return Math.random() * 1000 + "-" + id + "-" + Math.random() * 1000;
   }
 
   private setAuthToken(

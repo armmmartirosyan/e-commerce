@@ -38,6 +38,11 @@ export type AuthSlice = {
     data: null | User;
     error: string;
   };
+  currentUser: {
+    isLoading: boolean;
+    data: null | User;
+    error: string;
+  };
 };
 
 export type Validator = (arg: any) => boolean;

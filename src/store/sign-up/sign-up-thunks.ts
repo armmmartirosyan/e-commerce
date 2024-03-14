@@ -4,7 +4,7 @@ import { signUpApis } from "services/api/sign-up-apis";
 import { SignUpBody } from "types/user-types";
 
 export const signUp = createAsyncThunk(
-  "sign-up",
+  "sign/up",
   async (signUpBody: SignUpBody, { rejectWithValue }) => {
     try {
       await signUpApis.signUp(signUpBody);

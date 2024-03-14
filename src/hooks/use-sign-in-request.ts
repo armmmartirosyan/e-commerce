@@ -3,9 +3,9 @@ import { MouseEvent, useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import {
-  signInError,
-  signInLoading,
-  signInData,
+  signInErrorSelector,
+  signInLoadingSelector,
+  signInDataSelector,
 } from "store/auth/auth-selectors";
 import { signIn } from "store/auth/auth-thunks";
 import { useAppDispatch } from "store/configure-store";
@@ -21,9 +21,9 @@ export default function useSignInRequest({
   disableSignIn,
 }: UseSignInRequestProps): UseSignInRequestReturn {
   const dispatch = useAppDispatch();
-  const isLoading = useSelector(signInLoading);
-  const data = useSelector(signInData);
-  const error = useSelector(signInError);
+  const isLoading = useSelector(signInLoadingSelector);
+  const data = useSelector(signInDataSelector);
+  const error = useSelector(signInErrorSelector);
 
   const onSignIn = useCallback(
     (e: MouseEvent<HTMLButtonElement>) => {
@@ -38,9 +38,9 @@ export default function useSignInRequest({
 
   useEffect(() => {
     if (data) {
-      account.finalizeSignIn(email, remember, data.role);
+      account.finalizeSignIn(data.id, remember);
     }
-  }, [data, email, remember]);
+  }, [data, remember]);
 
   useEffect(() => {
     if (error) {

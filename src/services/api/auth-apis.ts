@@ -9,6 +9,12 @@ class AuthApis {
       },
     });
   }
+
+  public async getCurrentUser(id: string) {
+    return await api.get(`users`, {
+      params: { id },
+    });
+  }
 }
 
 export const authApis = new AuthApis();
