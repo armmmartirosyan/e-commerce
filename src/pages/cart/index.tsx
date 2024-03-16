@@ -48,6 +48,7 @@ function Cart() {
                 <TableCell align="center">Id</TableCell>
                 <TableCell align="center">Product name</TableCell>
                 <TableCell align="center">Quantity</TableCell>
+                <TableCell align="center">Total price(AMD)</TableCell>
                 <TableCell align="center"></TableCell>
               </TableRow>
             </TableHead>

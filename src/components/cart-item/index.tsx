@@ -54,6 +54,7 @@ export default memo(function ({ item, isLoading }: CartItemProps) {
           </Button>
         </Box>
       </TableCell>
+      <TableCell align="center">{quantity * item.productPrice}</TableCell>
       <TableCell align="center">
         {isLoading ? (
           <CircularProgress />
