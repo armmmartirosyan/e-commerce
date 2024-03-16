@@ -1,5 +1,5 @@
 import { ChangeEvent, useMemo, useState } from "react";
-import { UseSignInStateReturn } from "types/shared-types";
+import { UseSignInStateReturn } from "types/hook-types";
 import { validators } from "utils/validators";
 
 const { safePassword, validEmail } = validators;

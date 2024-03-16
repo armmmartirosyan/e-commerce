@@ -6,7 +6,7 @@ export default function WithHeaderLayout({ children }: WithHeaderLayoutProps) {
   return (
     <div className="with_header_layout_wrapper">
       <Header />
-      <div>{children}</div>
+      {children}
     </div>
   );
 }

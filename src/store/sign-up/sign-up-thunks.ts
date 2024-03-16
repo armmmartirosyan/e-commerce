@@ -1,11 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { INVALID_VALUE_ERROR } from "constants/shared-constants";
 import { signUpApis } from "services/api/sign-up-apis";
-import { SignUpBody } from "types/user-types";
+import { UserOmitId } from "types/user-types";
 
 export const signUp = createAsyncThunk(
   "sign/up",
-  async (signUpBody: SignUpBody, { rejectWithValue }) => {
+  async (signUpBody: UserOmitId, { rejectWithValue }) => {
     try {
       await signUpApis.signUp(signUpBody);
 

@@ -2,13 +2,13 @@ import Checkbox from "@mui/material/Checkbox";
 import React from "react";
 import { useSelector } from "react-redux";
 import { USER_ROLES } from "constants/shared-constants";
-import { SIGN_UP_FIELD_KEYS } from "constants/sign-up-constants";
+import { FIELD_KEYS } from "constants/sign-up-constants";
 import { useAppDispatch } from "store/configure-store";
 import { signUpRoleSelector } from "store/sign-up/sign-up-selectors";
 import { setSignUpField } from "store/sign-up/sign-up-slice";
-import { SignUpCheckboxProps } from "types/component-types";
+import { GenericOnlyDisabledPros } from "types/component-types";
 
-export default function SignUpRole({ disabled }: SignUpCheckboxProps) {
+export default function SignUpRole({ disabled }: GenericOnlyDisabledPros) {
   const dispatch = useAppDispatch();
   const role = useSelector(signUpRoleSelector);
 
@@ -16,14 +16,14 @@ export default function SignUpRole({ disabled }: SignUpCheckboxProps) {
     const newRole =
       role === USER_ROLES.ADMIN ? USER_ROLES.USER : USER_ROLES.ADMIN;
 
-    dispatch(setSignUpField({ [SIGN_UP_FIELD_KEYS.Role]: newRole }));
+    dispatch(setSignUpField({ [FIELD_KEYS.Role]: newRole }));
   };
 
   return (
     <label htmlFor="sign-up-role">
       <Checkbox
-        checked={role === USER_ROLES.ADMIN}
         id="sign-up-role"
+        checked={role === USER_ROLES.ADMIN}
         onClick={handleRoleChange}
         disabled={disabled}
       />

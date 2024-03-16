@@ -1,3 +1,8 @@
+import { account } from "providers/account-provider";
+import store from "store/configure-store";
+import { HeaderSetting } from "types/component-types";
+import { USER_ROLES } from "./shared-constants";
+
 export const PAGES = [
   {
     text: "Product list",
@@ -13,23 +18,27 @@ export const PAGES = [
   },
 ];
 
-export const SETTINGS = [
+export const SETTINGS: HeaderSetting[] = [
   {
     text: "Profile",
-    action: (callback?: VoidFunction) => {
-      callback && callback();
-    },
+    href: "/profile",
+    action: null,
+    allow: () => true,
   },
   {
     text: "Admin panel",
-    action: (callback?: VoidFunction) => {
-      callback && callback();
-    },
+    href: "/admin-panel",
+    action: null,
+    allow: () =>
+      store.getState().auth.currentUser.data?.role === USER_ROLES.ADMIN,
   },
   {
-    text: "Log out",
+    text: "Sign out",
+    href: "",
     action: (callback?: VoidFunction) => {
+      account.signOut();
       callback && callback();
     },
+    allow: () => true,
   },
 ];

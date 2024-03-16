@@ -10,9 +10,6 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import MenuItem from "@mui/material/MenuItem";
 
 import {
   currentUserDataSelector,
@@ -23,6 +20,8 @@ import Loading from "components/loading";
 import { PAGES, SETTINGS } from "constants/header-constants";
 import HeaderMenuItem from "components/header/components/menu-item";
 import MenuButton from "./components/menu-button";
+import SettingsItem from "./components/setting-item";
+import { account } from "providers/account-provider";
 
 export default function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -35,12 +34,6 @@ export default function Header() {
   const currentUserLoading = useSelector(currentUserLoadingSelector);
   const currentUserData = useSelector(currentUserDataSelector);
   const currentUserEror = useSelector(currentUserErrorSelector);
-
-  useEffect(() => {
-    if (currentUserEror) {
-      toast.error(currentUserEror);
-    }
-  }, [currentUserEror]);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -57,6 +50,13 @@ export default function Header() {
     setAnchorElUser(null);
   };
 
+  useEffect(() => {
+    if (currentUserEror) {
+      toast.error(currentUserEror);
+      account.signOut();
+    }
+  }, [currentUserEror]);
+
   return (
     <>
       {!currentUserLoading && !currentUserEror && currentUserData && (
@@ -67,7 +67,7 @@ export default function Header() {
                 variant="h6"
                 noWrap
                 component="a"
-                href="#app-bar-with-responsive-menu"
+                href="/product-list"
                 sx={{
                   mr: 2,
                   display: { xs: "none", md: "flex" },
@@ -119,7 +119,7 @@ export default function Header() {
                 variant="h5"
                 noWrap
                 component="a"
-                href="#app-bar-with-responsive-menu"
+                href="/product-list"
                 sx={{
                   mr: 2,
                   display: { xs: "flex", md: "none" },
@@ -145,7 +145,11 @@ export default function Header() {
 
               <Box sx={{ flexGrow: 0 }}>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src={currentUserData.imageUrl} />
+                  <img
+                    style={{ width: 40, height: 40, borderRadius: "50%" }}
+                    src={currentUserData.imageUrl}
+                    alt="Avatar"
+                  />
                 </IconButton>
                 <Menu
                   sx={{ mt: "45px" }}
@@ -162,13 +166,12 @@ export default function Header() {
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
                 >
-                  {SETTINGS.map(({ text, action }) => (
-                    <MenuItem
-                      key={text}
-                      onClick={() => action(handleCloseUserMenu)}
-                    >
-                      <Typography textAlign="center">{text}</Typography>
-                    </MenuItem>
+                  {SETTINGS.map((setting) => (
+                    <SettingsItem
+                      {...setting}
+                      key={setting.text}
+                      extraFunction={handleCloseUserMenu}
+                    />
                   ))}
                 </Menu>
               </Box>
@@ -178,8 +181,6 @@ export default function Header() {
       )}
 
       {currentUserLoading && <Loading />}
-
-      {currentUserEror && <p>Error</p>}
     </>
   );
 }

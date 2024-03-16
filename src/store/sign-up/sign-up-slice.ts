@@ -1,19 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { USER_ROLES } from "constants/shared-constants";
-import { SIGN_UP_FIELD_KEYS } from "constants/sign-up-constants";
-import { SignUpInitialState } from "types/user-types";
+import { FIELD_KEYS } from "constants/sign-up-constants";
+import { SignUpInitialState } from "types/redux-types";
 import { signUp } from "./sign-up-thunks";
 
 const initialState: SignUpInitialState = {
   localFields: {
-    [SIGN_UP_FIELD_KEYS.FirstName]: "",
-    [SIGN_UP_FIELD_KEYS.LastName]: "",
-    [SIGN_UP_FIELD_KEYS.Email]: "",
-    [SIGN_UP_FIELD_KEYS.Phone]: "",
-    [SIGN_UP_FIELD_KEYS.Image]: "",
-    [SIGN_UP_FIELD_KEYS.Password]: "",
-    [SIGN_UP_FIELD_KEYS.ConfirmPassword]: "",
-    [SIGN_UP_FIELD_KEYS.Role]: USER_ROLES.USER,
+    [FIELD_KEYS.FirstName]: "",
+    [FIELD_KEYS.LastName]: "",
+    [FIELD_KEYS.Email]: "",
+    [FIELD_KEYS.Phone]: "",
+    [FIELD_KEYS.Image]: "",
+    [FIELD_KEYS.Password]: "",
+    [FIELD_KEYS.ConfirmPassword]: "",
+    [FIELD_KEYS.Role]: USER_ROLES.USER,
   },
   signUpRequest: {
     isLoading: false,
@@ -36,19 +36,24 @@ export const signUpSlice = createSlice({
   extraReducers: (builder) =>
     builder
       .addCase(signUp.pending, (state) => {
-        state.signUpRequest.isLoading = true;
-        state.signUpRequest.success = false;
-        state.signUpRequest.error = "";
+        Object.assign(state.signUpRequest, {
+          isLoading: true,
+          success: false,
+          error: "",
+        });
       })
       .addCase(signUp.fulfilled, (state) => {
-        state.signUpRequest.isLoading = false;
-        state.signUpRequest.success = true;
-        state.signUpRequest.error = "";
+        Object.assign(state.signUpRequest, {
+          isLoading: false,
+          success: true,
+        });
       })
       .addCase(signUp.rejected, (state, action) => {
-        state.signUpRequest.isLoading = false;
-        state.signUpRequest.success = false;
-        state.signUpRequest.error = action.payload as string;
+        Object.assign(state.signUpRequest, {
+          isLoading: false,
+          success: false,
+          error: action.payload as string,
+        });
       }),
 });
 

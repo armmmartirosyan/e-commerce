@@ -27,6 +27,12 @@ class Validators {
     return regex.test(phoneNumber);
   }
 
+  public validPrice(value: string): boolean {
+    const regex = /^([0-9]\.)?[1-9][0-9]*$/;
+
+    return regex.test(value);
+  }
+
   public allowTypeNotNumbAndSymExceptDash(text: string): boolean {
     const regex =
       /^(?=.*[^0-9~`!@#$%^&*()_+={\[}\]|\:;"'<,>\.\/?\\])?[^0-9~`!@#$%^&*()_+={\[}\]|\:;"'<,>\.\/?\\]*$/;
@@ -38,6 +44,12 @@ class Validators {
     const regex = /^\d{0,8}$/;
 
     return regex.test(value);
+  }
+
+  public allowTypeCount(value: string): boolean {
+    const regex = /^[1-9][0-9]*$/;
+
+    return !value || regex.test(value);
   }
 }
 

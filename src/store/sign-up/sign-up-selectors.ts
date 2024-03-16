@@ -1,11 +1,11 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { SIGN_UP_FIELD_KEYS } from "constants/sign-up-constants";
+import { FIELD_KEYS } from "constants/sign-up-constants";
 import { RootState } from "store/configure-store";
-import { SignUpLocalState } from "types/user-types";
+import { SignUpLocalUser } from "types/user-types";
 
 const signUpBaseSelector = (state: RootState) => state.signUp;
 
-export const signUpGenericLocalSelector = (key: keyof SignUpLocalState) =>
+export const signUpGenericLocalSelector = (key: keyof SignUpLocalUser) =>
   createSelector(signUpBaseSelector, (state) => state.localFields[key]);
 
 export const signUpAllLocalFieldsSelector = createSelector(
@@ -15,7 +15,7 @@ export const signUpAllLocalFieldsSelector = createSelector(
 
 export const signUpRoleSelector = createSelector(
   signUpBaseSelector,
-  (state) => state.localFields[SIGN_UP_FIELD_KEYS.Role]
+  (state) => state.localFields[FIELD_KEYS.Role]
 );
 
 export const signUpRequestLoadingSelector = createSelector(

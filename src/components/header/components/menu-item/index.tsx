@@ -13,7 +13,6 @@ export default function HeaderMenuItem({
 
   const handleClick = () => {
     navigate(url);
-
     extraAction && extraAction();
   };
 

@@ -1,3 +1,4 @@
+import { User } from "types/user-types";
 import { api } from "./axios-config";
 
 class AuthApis {
@@ -14,6 +15,10 @@ class AuthApis {
     return await api.get(`users`, {
       params: { id },
     });
+  }
+
+  public async updateUser({ id, ...body }: User) {
+    return await api.put(`users/${id}`, body);
   }
 }
 

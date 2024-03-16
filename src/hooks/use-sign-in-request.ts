@@ -12,7 +12,7 @@ import { useAppDispatch } from "store/configure-store";
 import {
   UseSignInRequestProps,
   UseSignInRequestReturn,
-} from "types/shared-types";
+} from "types/hook-types";
 
 export default function useSignInRequest({
   email,
@@ -38,7 +38,7 @@ export default function useSignInRequest({
 
   useEffect(() => {
     if (data) {
-      account.finalizeSignIn(data.id, remember);
+      account.finalizeSignIn(data.id, data.role, remember);
     }
   }, [data, remember]);
 

@@ -34,6 +34,7 @@ module.exports = {
       api: path.resolve(__dirname, "src/services/api"),
       services: path.resolve(__dirname, "src/services"),
       layouts: path.resolve(__dirname, "src/layouts"),
+      contexts: path.resolve(__dirname, "src/contexts"),
       pages: path.resolve(__dirname, "src/pages"),
       hooks: path.resolve(__dirname, "src/hooks"),
       utils: path.resolve(__dirname, "src/utils"),

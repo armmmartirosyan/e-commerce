@@ -1,8 +1,8 @@
-import { SignUpBody } from "types/user-types";
+import { UserOmitId } from "types/user-types";
 import { api } from "./axios-config";
 
 class SignUpApis {
-  public async signUp(userData: SignUpBody) {
+  public async signUp(userData: UserOmitId) {
     return await api.post(`users`, userData);
   }
 }

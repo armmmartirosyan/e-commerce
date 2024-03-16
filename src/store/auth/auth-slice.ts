@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getCurrentUser, signIn } from "./auth-thunks";
-import { AuthSlice } from "types/shared-types";
+import { getCurrentUser, signIn, updateUser } from "./auth-thunks";
+import { AuthInitialState } from "types/redux-types";
+import { toast } from "react-toastify";
+import { USER_UPDATE_SUCCESS } from "constants/shared-constants";
 
-const initialState: AuthSlice = {
+const initialState: AuthInitialState = {
   signIn: {
     isLoading: false,
     data: null,
@@ -18,40 +20,78 @@ const initialState: AuthSlice = {
 export const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    updateCurrentUser(state, action) {
+      state.currentUser.data = { ...state.currentUser.data, ...action.payload };
+    },
+  },
   extraReducers: (builder) =>
     builder
       .addCase(signIn.pending, (state) => {
-        state.signIn.isLoading = true;
-        state.signIn.data = null;
-        state.signIn.error = "";
+        Object.assign(state.signIn, {
+          isLoading: true,
+          data: null,
+          error: "",
+        });
       })
       .addCase(signIn.fulfilled, (state, action) => {
-        state.signIn.isLoading = false;
-        state.signIn.data = action.payload;
-        state.signIn.error = "";
+        Object.assign(state.signIn, {
+          isLoading: false,
+          data: action.payload,
+        });
       })
       .addCase(signIn.rejected, (state, action) => {
-        state.signIn.isLoading = false;
-        state.signIn.data = null;
-        state.signIn.error = action.payload as string;
+        Object.assign(state.signIn, {
+          isLoading: false,
+          data: null,
+          error: action.payload as string,
+        });
       })
 
       .addCase(getCurrentUser.pending, (state) => {
-        state.currentUser.isLoading = true;
-        state.currentUser.data = null;
-        state.currentUser.error = "";
+        Object.assign(state.currentUser, {
+          isLoading: true,
+          data: null,
+          error: "",
+        });
       })
       .addCase(getCurrentUser.fulfilled, (state, action) => {
-        state.currentUser.isLoading = false;
-        state.currentUser.data = action.payload;
-        state.currentUser.error = "";
+        Object.assign(state.currentUser, {
+          isLoading: false,
+          data: action.payload,
+        });
       })
       .addCase(getCurrentUser.rejected, (state, action) => {
+        Object.assign(state.currentUser, {
+          isLoading: false,
+          data: null,
+          error: action.payload as string,
+        });
+      })
+
+      .addCase(updateUser.pending, (state) => {
+        Object.assign(state.currentUser, {
+          isLoading: true,
+          data: null,
+          error: "",
+        });
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
         state.currentUser.isLoading = false;
-        state.currentUser.data = null;
-        state.currentUser.error = action.payload as string;
+
+        toast.success(USER_UPDATE_SUCCESS);
+      })
+      .addCase(updateUser.rejected, (state, action) => {
+        Object.assign(state.currentUser, {
+          isLoading: false,
+          data: null,
+          error: action.payload as string,
+        });
+
+        toast.error(action.payload as string);
       }),
 });
+
+export const { updateCurrentUser } = authSlice.actions;
 
 export default authSlice.reducer;

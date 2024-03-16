@@ -12,7 +12,6 @@ export default function MenuButton({
 
   const handleClick = () => {
     navigate(url);
-
     extraAction && extraAction();
   };
   return (

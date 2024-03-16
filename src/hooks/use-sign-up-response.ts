@@ -1,3 +1,4 @@
+import { SIGN_UP_ERROR, SIGN_UP_SUCCESS } from "constants/shared-constants";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -14,14 +15,14 @@ export default function useSignUpResponse() {
 
   useEffect(() => {
     if (success) {
-      toast.success("You've signed up");
+      toast.success(SIGN_UP_SUCCESS);
       navigate("/");
     }
   }, [success]);
 
   useEffect(() => {
     if (error) {
-      toast.error("Please fill all required fields correctly!");
+      toast.error(SIGN_UP_ERROR);
     }
   }, [error]);
 }
