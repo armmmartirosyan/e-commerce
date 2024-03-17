@@ -71,3 +71,5 @@ export type SignInThunkPayload = {
   email: string;
   password: string;
 };
+
+export type GetCartItemPayload = { productId: string; userId: string };

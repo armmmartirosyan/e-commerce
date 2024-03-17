@@ -28,7 +28,7 @@ export function getAddCartObject(
     productId: product.id,
     productTitle: product.title,
     productPrice: product.price,
-    quantity: quantity + 1,
+    quantity: quantity,
     userId,
   };
 }

@@ -3,7 +3,10 @@ import { UNKNOWN_ERROR } from "constants/shared-constants";
 import { cartApis } from "services/api/cart-apis";
 import store from "store/configure-store";
 import { AddUpdateCartItemDTO } from "types/product-types";
-import { UpdateCartItemThunkPayload } from "types/redux-types";
+import {
+  GetCartItemPayload,
+  UpdateCartItemThunkPayload,
+} from "types/redux-types";
 import { setRemovingLoadingId } from "./cart-slice";
 
 export const getCart = createAsyncThunk(
@@ -19,9 +22,9 @@ export const getCart = createAsyncThunk(
 
 export const getCartItem = createAsyncThunk(
   "get/cart/item",
-  async (productId: string, { rejectWithValue }) => {
+  async ({ productId, userId }: GetCartItemPayload, { rejectWithValue }) => {
     try {
-      return (await cartApis.getCartItem(productId)).data[0];
+      return (await cartApis.getCartItem(productId, userId)).data[0];
     } catch (err: any) {
       return rejectWithValue(err?.response?.data || err || UNKNOWN_ERROR);
     }

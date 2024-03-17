@@ -6,8 +6,8 @@ class CartApis {
     return await api.get(`cart`, { params: { userId } });
   }
 
-  public async getCartItem(productId: string) {
-    return await api.get(`cart`, { params: { productId } });
+  public async getCartItem(productId: string, userId: string) {
+    return await api.get(`cart`, { params: { productId, userId } });
   }
 
   public async removeCartItem(id: string) {
